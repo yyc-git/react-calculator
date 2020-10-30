@@ -1,0 +1,80 @@
+{
+  // Controls if quick suggestions should show up while typing
+  "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": false
+  },
+  // Controls whether suggestions should be accepted on commit characters. For example, in JavaScript, the semi-colon (`;`) can be a commit character that accepts a suggestion and types that character.
+  "editor.acceptSuggestionOnCommitCharacter": true,
+  // Controls if suggestions should be accepted on 'Enter' - in addition to 'Tab'. Helps to avoid ambiguity between inserting new lines or accepting suggestions. The value 'smart' means only accept a suggestion with Enter when it makes a textual change
+  "editor.acceptSuggestionOnEnter": "on",
+  // Controls the delay in ms after which quick suggestions will show up.
+  "editor.quickSuggestionsDelay": 10,
+  "workbench.editor.enablePreview": false,
+  "workbench.iconTheme": null,
+  "vim.disableAnnoyingNeovimMessage": true,
+  "files.autoSave": "afterDelay",
+  "window.zoomLevel": 2,
+  "window.newWindowDimensions": "maximized",
+  "window.zoomLevel": 1,
+  "terminal.integrated.fontSize": 12,
+  "workbench.editor.enablePreview": false,
+  "reason.formatOnSave": true,
+  "editor.wordWrap": "on",
+  // "editor.wrappingColumn": 30,
+  // "editor.wordWrap": "wordWrapColumn",
+  // "editor.quickSuggestions": false,
+  // "editor.quickSuggestions": true,
+  "editor.parameterHints": true,
+  // "editor.wordBasedSuggestions": true,
+  "editor.snippetSuggestions": "none",
+  "editor.tabCompletion": "on",
+  "explorer.confirmDragAndDrop": false,
+  // 控制终端保持在缓冲区的最大行数。
+  "terminal.integrated.scrollback": 1000,
+  "vim.useCtrlKeys": true,
+  "terminal.integrated.rendererType": "dom",
+  "explorer.confirmDelete": false,
+  "vim.foldfix": true,
+  "vim.statusBarColorControl": false,
+  "vim.experimentalOptimizations": true,
+  "vim.useSystemClipboard": false,
+  "update.mode": "none",
+  "search.exclude": {
+      "ldraw_parts*": false,
+      "**/*.d": true,
+      "**/node_modules": false,
+      "**/node_modules/*.js": true
+  },
+  "reason_language_server.dependencies_codelens": false, "reason_language_server.per_value_codelens": true,
+  "[javascript]": {
+      "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "clang-format.executable": "/Users/y/File/node_modules/node_modules/clang-format/bin/darwin_x64/clang-format",
+  "editor.minimap.renderCharacters": false,
+  "editor.minimap.enabled": false,
+  "editor.smoothScrolling": false,
+  "editor.cursorSmoothCaretAnimation": false,
+  "editor.renderIndentGuides": false,
+  "editor.hover.enabled": false,
+  "editor.hover.sticky": false,
+  "breadcrumbs.enabled": false,
+  "editor.colorDecorators": false,
+  "editor.links": false,
+  "vim.timeout": 10,
+  "zenMode.hideStatusBar": false,
+  "zenMode.hideActivityBar": false,
+  "zenMode.hideTabs": false,
+  "zenMode.restore": true,
+  "[reason]": {
+      "editor.defaultFormatter": "jaredly.reason-vscode"
+  },
+  "[typescript]": {
+      "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "search.useIgnoreFiles": false,
+  "shaderc-lint.glslcPath": "/Users/y/File/tool/shaderc/install/bin/glslc",
+  "shaderc-lint.glslcArgs": "--target-env=vulkan1.2",
+  "editor.fontSize": 12
+}
