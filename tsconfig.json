@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "outDir": "./lib",
+        "rootDir": "src",
+        "sourceMap": true,
+        "module": "commonjs",
+        "allowJs": false,
+        "target": "es6",
+        "jsx": "react",
+        "moduleResolution": "node",
+        "noEmit": true
+    },
+    "include": [
+        "./src"
+    ],
+    "awesomeTypescriptLoaderOptions": {
+        "transpileOnly": true
+    }
+}
