@@ -29,15 +29,13 @@ function NumbersList(props) {
   const calculator = props.calculator;
 
   return (
-    <div>
+    <section>
       {numbers.map((number) =>
         // TODO move Buttons logic here
         <Buttons key={number.toString()}
           value={number} setCalculator={setCalculator} calculator={calculator} />
       )}
-
-
-    </div>
+    </section>
   );
 }
 

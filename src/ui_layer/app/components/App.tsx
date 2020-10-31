@@ -126,20 +126,6 @@ let calculations = ["+", "-", "*", "/"]
 
 // show(result)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 let App = () => {
     // TODO rename to result, setResult(all)
     // TODO useState("")
@@ -171,9 +157,7 @@ let App = () => {
         });
     }
 
-    // TODO (semantic): use html5 section/article(all)
-
-    return <div>
+    return <section>
 {/* TODO rename to NumberButton */}
         <NumberList numbers={numbers} setCalculator={setCalculator} calculator={calculator} />
 
@@ -183,10 +167,8 @@ let App = () => {
         <button key="=" value="=" style={{ color: 'red' }} onClick={calculatorFuc}>=</button>
         <button key="clear" value="clear" style={{ color: 'red' }} onClick={calculatorClear}>clear</button>
 
-        {/* TODO (semantic): use span  */}
-
-        <div>{calculator}</div>
-    </div>
+        <span style={{ display:'block'}}>{calculator}</span>
+    </section>
 }
 
 export default App;
