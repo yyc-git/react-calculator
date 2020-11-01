@@ -1,8 +1,8 @@
 import * as React from "react";
 import { requireCheck, test } from "../../../utils/contract";
 
-function NumberButton({numbers, result, setResult}) {
-
+function NumberButton({numbers, result, setResult, setCompute, compute}) {
+  
   function update(value) {
     // TODO add contract
     // requireCheck(() =>{
@@ -10,7 +10,13 @@ function NumberButton({numbers, result, setResult}) {
     //     return result === "" || /\d+/.test(result) || result.includes('+');
     //   });
     // });
-    setResult(result + value);
+    let i = compute;
+    i.push(value);
+    setCompute(() => i);
+    
+    setResult(eval(compute.join('')));
+    
+   
   }
 
   return (
