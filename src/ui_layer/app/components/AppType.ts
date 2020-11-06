@@ -3,26 +3,24 @@ export interface number_ {
     exec: (sum: sum, input: number_) => numberSum
 };
 
-type operatorValue = "+";
+export type operatorValue = "+";
 
-export interface operator {
+export interface operator_ {
     value: operatorValue,
-    exec: (sum: sum, input: operator) => operatorSum
+    exec: (sum: sum, input: operator_) => operatorSum
 };
 
 export type input =
     | number_
-    | operator;
-// export type input = number_ & operator;
+    | operator_;
 
-// type numberSum = number;
 export type numberSum = {
     type: "numberSum",
-    value: number
+    value: number 
 }
 
-// type operatorSum = [number_, operator];
-type operatorSum = {
+// type operatorSum = [number_, operator_];
+export type operatorSum = {
     type: "operatorSum",
     value: [number, operatorValue]
 }
@@ -36,8 +34,9 @@ let _getValueFromNumber_ = (number_: number_) => {
     return number_.value;
 }
 
-let _getValueFromOperate = (operator: operator) => {
-    return operator.value;
+export let _getValueFromOperate = (operator_: operator_) => {
+    console.log(operator_, 'appType _getValueFromOperate')
+    return operator_.value;
 }
 
 export let buildNumber_ = (value: number): number_ => {
@@ -52,7 +51,7 @@ export let buildNumber_ = (value: number): number_ => {
                     }
                 case "operatorSum":
                     let [previousNumber, _] = previousSum.value;
-
+                    console.log(previousSum.value)
                     return {
                         type: "numberSum",
                         value: previousNumber + _getValueFromNumber_(currentValue)
@@ -62,10 +61,10 @@ export let buildNumber_ = (value: number): number_ => {
     }
 }
 
-export let buildOperator = (value: operatorValue): operator => {
+export let buildOperator = (value: operatorValue): operator_ => {
     return {
         value,
-        exec: (previousSum: sum, currentValue: operator): operatorSum => {
+        exec: (previousSum: sum, currentValue: operator_): operatorSum => {
             switch (previousSum.type) {
                 case "numberSum":
                     return {
@@ -82,5 +81,15 @@ export let buildOperator = (value: operatorValue): operator => {
     }
 }
 export let getValueFromNumberSum = (numberSum: numberSum): number => {
+    console.log(numberSum, 'apptype——getValueFromNumberSum')
     return numberSum.value;
 };
+
+export let getValueFromOperatorSum = (operator_: operator_) => {
+    if (operator_.value.slice(0,1).toString() === "0") {
+        return operator_.value.slice(2)
+    }
+    console.log(operator_, "appType getValueFromOperatorSum")
+    return operator_.value;
+}
+
