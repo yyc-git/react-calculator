@@ -1,21 +1,21 @@
 import * as React from "react";
 import { List } from "immutable";
-import { input, number_, operator_, operatorValue, operatorSum, sum, buildOperator, getValueFromOperatorSum, _getValueFromOperate } from "./AppType";
+import { input, number_, operator_, operatorValue, operatorSum, sum, buildOperator, getValueFromOperatorSum, _getValueFromOperate, compute, convertOperatorSumValueToShowResult } from "./AppType";
 import { flow } from "lodash";
 
 function CalculationButton({ calculations, setShowResult, setComputeResult, computeResult }) {
-
   let _compute = (computeResult: List<input>): operatorSum => {
     return computeResult.reduce((sum: sum, input: number_ & operator_) => {
-      return (input as input).exec(sum, input);
+      // return (input as input).exec(sum, input);
+      return compute(sum, input);
     }, {
-      type: "numberSum",  
+      type: "numberSum",
       value: 0
     }) as operatorSum;
   };
 
   let _update = (operatorValue: operatorValue, setShowResult, setComputeResult, computeResult: List<input>) => {
-    let operator: operator_ = buildOperator(operatorValue );
+    let operator: operator_ = buildOperator(operatorValue);
 
     let newComputeResult = computeResult.slice().push(
       operator
@@ -24,9 +24,14 @@ function CalculationButton({ calculations, setShowResult, setComputeResult, comp
       newComputeResult
     );
     console.log(newComputeResult, "Calculation newComputeResult")
+
+    // TODO change to:
+    //   flow([
+    //     _compute, getValueFromOperatorSum, convertOperatorSumValueToShowResult, setShowResult
+    //   ])(newComputeResult)
     setShowResult(
       flow([
-        _compute, getValueFromOperatorSum
+        _compute, getValueFromOperatorSum, convertOperatorSumValueToShowResult
       ])(newComputeResult)
     )
   }
@@ -34,6 +39,7 @@ function CalculationButton({ calculations, setShowResult, setComputeResult, comp
   return (
     <section>
       {calculations.map((calculation) =>
+        // TODO remove .toString()
         <button key={calculation.toString()} value={calculation} onClick={(_e) => _update(calculation, setShowResult, setComputeResult, computeResult)}>{calculation}</button>
       )}
     </section>
