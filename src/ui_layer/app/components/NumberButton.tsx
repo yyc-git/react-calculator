@@ -4,10 +4,9 @@ import { input, number_, operator_, numberSum, sum, buildNumber_, getValueFromNu
 import { flow } from "lodash";
 
 // TODO change to arrow(all)
-function NumberButton({ numbers, setShowResult, setComputeResult, computeResult }) {
+let NumberButton = ({ numbers, setShowResult, setComputeResult, computeResult }) => {
   let _compute = (computeResult: List<input>): numberSum => {
     return computeResult.reduce((sum: sum, input: number_ & operator_) => {
-      // return (input as input).exec(sum, input);
       return compute(sum, input);
     }, {
       type: "numberSum",
@@ -41,8 +40,7 @@ function NumberButton({ numbers, setShowResult, setComputeResult, computeResult 
   return (
     <section>
       {numbers.map((number) =>
-        // TODO remove .toString()
-        <button key={number.toString()} value={number} onClick={(_e) => _update(number, setShowResult, setComputeResult, computeResult)}>{number}</button>
+        <button key={number} value={number} onClick={(_e) => _update(number, setShowResult, setComputeResult, computeResult)}>{number}</button>
       )}
     </section>
   );

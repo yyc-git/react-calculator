@@ -3,7 +3,7 @@ import { List } from "immutable";
 import { input, number_, operator_, operatorValue, operatorSum, sum, buildOperator, getValueFromOperatorSum, _getValueFromOperate, compute, convertOperatorSumValueToShowResult } from "./AppType";
 import { flow } from "lodash";
 
-function CalculationButton({ calculations, setShowResult, setComputeResult, computeResult }) {
+let CalculationButton = ({ calculations, setShowResult, setComputeResult, computeResult }) => {
   let _compute = (computeResult: List<input>): operatorSum => {
     return computeResult.reduce((sum: sum, input: number_ & operator_) => {
       return compute(sum, input);
@@ -38,7 +38,6 @@ function CalculationButton({ calculations, setShowResult, setComputeResult, comp
   return (
     <section>
       {calculations.map((calculation) =>
-        // TODO remove .toString()
         <button key={calculation} value={calculation} onClick={(_e) => _update(calculation, setShowResult, setComputeResult, computeResult)}>{calculation}</button>
       )}
     </section>
