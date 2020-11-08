@@ -17,7 +17,7 @@ function CalculationButton({ calculations, setShowResult, setComputeResult, comp
   let _update = (operatorValue: operatorValue, setShowResult, setComputeResult, computeResult: List<input>) => {
     let operator: operator_ = buildOperator(operatorValue);
 
-    let newComputeResult = computeResult.slice().push(
+    let newComputeResult = computeResult.push(
       operator
     );
     setComputeResult(

@@ -19,7 +19,7 @@ function NumberButton({ numbers, setShowResult, setComputeResult, computeResult 
     let number: number_ = buildNumber_(Number(numberValue));
 
     // TODO remove slice(all)
-    let newComputeResult = computeResult.slice().push(
+    let newComputeResult = computeResult.push(
       number
     );
 

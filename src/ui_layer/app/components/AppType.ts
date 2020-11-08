@@ -52,22 +52,6 @@ export let buildNumber_ = (value: number): number_ => {
     return {
         type: "number_",
         value,
-        // exec: (previousSum: sum, currentValue: number_): numberSum => {
-        //     switch (previousSum.type) {
-        //         case "numberSum":
-        //             return {
-        //                 type: "numberSum",
-        //                 value: previousSum.value * 10 + _getValueFromNumber_(currentValue)
-        //             }
-        //         case "operatorSum":
-        //             let [previousNumber, _] = previousSum.value;
-        //             console.log(previousSum.value)
-        //             return {
-        //                 type: "numberSum",
-        //                 value: previousNumber + _getValueFromNumber_(currentValue)
-        //             }
-        //     }
-        // }
     }
 }
 
@@ -79,20 +63,6 @@ export let buildOperator = (value: operatorValue): operator_ => {
     return {
         type: "operator",
         value,
-        // exec: (previousSum: sum, currentValue: operator_): operatorSum => {
-        //     switch (previousSum.type) {
-        //         case "numberSum":
-        //             return {
-        //                 type: "operatorSum",
-        //                 value: [previousSum.value, _getValueFromOperate(currentValue)]
-        //             }
-        //         case "operatorSum":
-        //             return {
-        //                 type: "operatorSum",
-        //                 value: previousSum.value
-        //             }
-        //     }
-        // }
     }
 }
 
