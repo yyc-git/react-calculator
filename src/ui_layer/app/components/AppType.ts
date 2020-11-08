@@ -82,12 +82,12 @@ export let getValueFromOperatorSum = (operator_: operator_) => {
 
 // TODO implement
 
-export let convertNumberSumValueToShowResult = (value:numberSumValue) =>{
+export let convertNumberSumValueToShowResult = (value: numberSumValue) => {
 
 }
 
 
-export let convertOperatorSumValueToShowResult = (value:operatorSumValue) =>{
+export let convertOperatorSumValueToShowResult = (value: operatorSumValue) => {
 
 }
 

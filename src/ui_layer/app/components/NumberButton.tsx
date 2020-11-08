@@ -3,10 +3,9 @@ import { List } from "immutable";
 import { input, number_, operator_, numberSum, sum, buildNumber_, getValueFromNumberSum, compute, convertNumberSumValueToShowResult } from "./AppType";
 import { flow } from "lodash";
 
-// TODO change to arrow(all)
-let NumberButton = ({ numbers, setShowResult, setComputeResult, computeResult }) => {
-  let _compute = (computeResult: List<input>): numberSum => {
-    return computeResult.reduce((sum: sum, input: number_ & operator_) => {
+let NumberButton = ({ numbers, setShowResult, setExpression, expression }) => {
+  let _compute = (expression: List<input>): numberSum => {
+    return expression.reduce((sum: sum, input: number_ & operator_) => {
       return compute(sum, input);
     }, {
       type: "numberSum",
@@ -14,33 +13,26 @@ let NumberButton = ({ numbers, setShowResult, setComputeResult, computeResult })
     }) as numberSum;
   };
 
-  let _update = (numberValue: string, setShowResult, setComputeResult, computeResult: List<input>) => {
+  let _update = (numberValue: string, setShowResult, setExpression, expression: List<input>) => {
     let number: number_ = buildNumber_(Number(numberValue));
 
-    let newComputeResult = computeResult.push(
+    let newComputeResult = expression.push(
       number
     );
 
-    setComputeResult(
+    setExpression(
       newComputeResult
     );
-    console.log(newComputeResult)
 
-    // TODO change to:
-      flow([
-        _compute, getValueFromNumberSum, convertNumberSumValueToShowResult, setShowResult
-      ])(newComputeResult)
-    // setShowResult(
-    //   flow([
-    //     _compute, getValueFromNumberSum, convertNumberSumValueToShowResult
-    //   ])(newComputeResult)
-    // )
+    flow([
+      _compute, getValueFromNumberSum, convertNumberSumValueToShowResult, setShowResult
+    ])(newComputeResult)
   }
 
   return (
     <section>
       {numbers.map((number) =>
-        <button key={number} value={number} onClick={(_e) => _update(number, setShowResult, setComputeResult, computeResult)}>{number}</button>
+        <button key={number} value={number} onClick={(_e) => _update(number, setShowResult, setExpression, expression)}>{number}</button>
       )}
     </section>
   );
