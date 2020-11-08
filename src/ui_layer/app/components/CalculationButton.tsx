@@ -6,7 +6,6 @@ import { flow } from "lodash";
 function CalculationButton({ calculations, setShowResult, setComputeResult, computeResult }) {
   let _compute = (computeResult: List<input>): operatorSum => {
     return computeResult.reduce((sum: sum, input: number_ & operator_) => {
-      // return (input as input).exec(sum, input);
       return compute(sum, input);
     }, {
       type: "numberSum",
@@ -40,7 +39,7 @@ function CalculationButton({ calculations, setShowResult, setComputeResult, comp
     <section>
       {calculations.map((calculation) =>
         // TODO remove .toString()
-        <button key={calculation.toString()} value={calculation} onClick={(_e) => _update(calculation, setShowResult, setComputeResult, computeResult)}>{calculation}</button>
+        <button key={calculation} value={calculation} onClick={(_e) => _update(calculation, setShowResult, setComputeResult, computeResult)}>{calculation}</button>
       )}
     </section>
   );

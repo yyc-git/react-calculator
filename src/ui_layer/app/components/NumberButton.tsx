@@ -18,7 +18,6 @@ function NumberButton({ numbers, setShowResult, setComputeResult, computeResult 
   let _update = (numberValue: string, setShowResult, setComputeResult, computeResult: List<input>) => {
     let number: number_ = buildNumber_(Number(numberValue));
 
-    // TODO remove slice(all)
     let newComputeResult = computeResult.push(
       number
     );
@@ -29,14 +28,14 @@ function NumberButton({ numbers, setShowResult, setComputeResult, computeResult 
     console.log(newComputeResult)
 
     // TODO change to:
-    //   flow([
-    //     _compute, getValueFromNumberSum, convertNumberSumValueToShowResult, setShowResult
-    //   ])(newComputeResult)
-    setShowResult(
       flow([
-        _compute, getValueFromNumberSum, convertNumberSumValueToShowResult
+        _compute, getValueFromNumberSum, convertNumberSumValueToShowResult, setShowResult
       ])(newComputeResult)
-    )
+    // setShowResult(
+    //   flow([
+    //     _compute, getValueFromNumberSum, convertNumberSumValueToShowResult
+    //   ])(newComputeResult)
+    // )
   }
 
   return (
