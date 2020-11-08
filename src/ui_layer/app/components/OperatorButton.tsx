@@ -1,11 +1,11 @@
 import * as React from "react";
 import { List } from "immutable";
-import { input, number_, operator_, operatorValue, operatorSum, sum, buildOperator, getValueFromOperatorSum, _getValueFromOperate, compute, convertOperatorSumValueToShowResult } from "./AppType";
+import { input, number_, operator, operatorValue, operatorSum, sum, buildOperator, getValueFromOperatorSum, _getValueFromOperate, compute, convertOperatorSumValueToShowResult } from "./AppType";
 import { flow } from "lodash";
 
 let OperatorButton = ({ operators, setShowResult, setExpression, expression }) => {
   let _compute = (expression: List<input>): operatorSum => {
-    return expression.reduce((sum: sum, input: number_ & operator_) => {
+    return expression.reduce((sum: sum, input: number_ & operator) => {
       return compute(sum, input);
     }, {
       type: "numberSum",
@@ -14,7 +14,7 @@ let OperatorButton = ({ operators, setShowResult, setExpression, expression }) =
   };
 
   let _update = (operatorValue: operatorValue, setShowResult, setExpression, expression: List<input>) => {
-    let operator: operator_ = buildOperator(operatorValue);
+    let operator: operator = buildOperator(operatorValue);
 
     let newComputeResult = expression.push(
       operator

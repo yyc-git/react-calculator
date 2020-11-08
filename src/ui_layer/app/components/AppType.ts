@@ -8,16 +8,15 @@ export interface number_ {
 
 export type operatorValue = "+";
 
-// TODO rename operator_ to operator
-export interface operator_ {
+export interface operator {
     type: "operator",
     value: operatorValue,
-    // exec: (sum: sum, input: operator_) => operatorSum
+    // exec: (sum: sum, input: operator) => operatorSum
 };
 
 export type input =
     | number_
-    | operator_;
+    | operator;
 
 type numberSumValue = number;
 
@@ -28,7 +27,7 @@ export type numberSum = {
 
 type operatorSumValue = [number, operatorValue];
 
-// type operatorSum = [number_, operator_];
+// type operatorSum = [number_, operator];
 export type operatorSum = {
     type: "operatorSum",
     value: operatorSumValue
@@ -43,9 +42,9 @@ let _getValueFromNumber_ = (number_: number_) => {
     return number_.value;
 }
 
-export let _getValueFromOperate = (operator_: operator_) => {
-    console.log(operator_, 'appType _getValueFromOperate')
-    return operator_.value;
+export let _getValueFromOperate = (operator: operator) => {
+    console.log(operator, 'appType _getValueFromOperate')
+    return operator.value;
 }
 
 export let buildNumber_ = (value: number): number_ => {
@@ -59,7 +58,7 @@ export let buildNumber_ = (value: number): number_ => {
 // | Number(number)
 // | buildOperator((number, string));
 
-export let buildOperator = (value: operatorValue): operator_ => {
+export let buildOperator = (value: operatorValue): operator => {
     return {
         type: "operator",
         value,
@@ -71,13 +70,11 @@ export let getValueFromNumberSum = (numberSum: numberSum): number => {
     return numberSum.value;
 };
 
-// TODO change to operatorSum
-export let getValueFromOperatorSum = (operator_: operator_) => {
-    if (operator_.value.slice(0, 1).toString() === "0") {
-        return operator_.value.slice(2)
+export let getValueFromOperatorSum = (operatorSum: operatorSum) => {
+    if (operatorSum.value.slice(0, 1).toString() === "0") {
+        return operatorSum.value.slice(2)
     }
-    console.log(operator_, "appType getValueFromOperatorSum")
-    return operator_.value;
+    return operatorSum.value;
 }
 
 // TODO implement

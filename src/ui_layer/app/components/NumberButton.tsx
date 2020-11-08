@@ -1,11 +1,11 @@
 import * as React from "react";
 import { List } from "immutable";
-import { input, number_, operator_, numberSum, sum, buildNumber_, getValueFromNumberSum, compute, convertNumberSumValueToShowResult } from "./AppType";
+import { input, number_, operator, numberSum, sum, buildNumber_, getValueFromNumberSum, compute, convertNumberSumValueToShowResult } from "./AppType";
 import { flow } from "lodash";
 
 let NumberButton = ({ numbers, setShowResult, setExpression, expression }) => {
   let _compute = (expression: List<input>): numberSum => {
-    return expression.reduce((sum: sum, input: number_ & operator_) => {
+    return expression.reduce((sum: sum, input: number_ & operator) => {
       return compute(sum, input);
     }, {
       type: "numberSum",
