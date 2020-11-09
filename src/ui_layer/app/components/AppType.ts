@@ -71,21 +71,21 @@ export let getValueFromNumberSum = (numberSum: numberSum): number => {
 };
 
 export let getValueFromOperatorSum = (operatorSum: operatorSum) => {
-    if (operatorSum.value.slice(0, 1).toString() === "0") {
-        return operatorSum.value.slice(2)
-    }
     return operatorSum.value;
 }
 
 // TODO implement
 
 export let convertNumberSumValueToShowResult = (value: numberSumValue) => {
-
+    return value
 }
 
 
 export let convertOperatorSumValueToShowResult = (value: operatorSumValue) => {
-
+    if (value.slice(0, 1).toString() === "0") {
+        return value.slice(2)
+    }
+    return value
 }
 
 // TODO fix: handle "0 + 1 2"
