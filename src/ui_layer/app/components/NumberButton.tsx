@@ -5,8 +5,8 @@ import { flow } from "lodash";
 
 let NumberButton = ({ numbers, setShowResult, setExpression, expression }) => {
   let _compute = (expression: List<input>): numberSum => {
-    return expression.reduce((sum: sum, input: number_ & operator) => {
-      return compute(sum, input);
+    return expression.reduce((sum: sum, input: number_ & operator, currentIndex, sourceList) => {
+      return compute(sum, input, currentIndex, sourceList);
     }, {
       type: "numberSum",
       value: 0

@@ -5,8 +5,8 @@ import { flow } from "lodash";
 
 let OperatorButton = ({ operators, setShowResult, setExpression, expression }) => {
   let _compute = (expression: List<input>): operatorSum => {
-    return expression.reduce((sum: sum, input: number_ & operator) => {
-      return compute(sum, input);
+    return expression.reduce((sum: sum, input: number_ & operator, currentIndex, sourceList) =>{
+      return compute(sum, input, currentIndex, sourceList); 
     }, {
       type: "numberSum",
       value: 0
@@ -15,7 +15,6 @@ let OperatorButton = ({ operators, setShowResult, setExpression, expression }) =
 
   let _update = (operatorValue: operatorValue, setShowResult, setExpression, expression: List<input>) => {
     let operator: operator = buildOperator(operatorValue);
-
     let newComputeResult = expression.push(
       operator
     );

@@ -1,126 +1,150 @@
+import { List } from "immutable";
+
 type numberValue = number;
 
 export interface number_ {
-    type: "number_",
-    value: numberValue,
-    // exec: (sum: sum, input: number_) => numberSum
+  type: "number_",
+  value: numberValue,
 };
 
 export type operatorValue = "+";
 
 export interface operator {
-    type: "operator",
-    value: operatorValue,
-    // exec: (sum: sum, input: operator) => operatorSum
+  type: "operator",
+  value: operatorValue,
 };
 
 export type input =
-    | number_
-    | operator;
+  | number_
+  | operator;
 
 type numberSumValue = number;
 
 export type numberSum = {
-    type: "numberSum",
-    value: numberSumValue
+  type: "numberSum",
+  value: numberSumValue
 }
 
-type operatorSumValue = [number, operatorValue];
+type operatorSumValue = [number, operatorValue, number];
 
-// type operatorSum = [number_, operator];
 export type operatorSum = {
-    type: "operatorSum",
-    value: operatorSumValue
+  type: "operatorSum",
+  value: operatorSumValue
 }
 
 export type sum =
-    | numberSum
-    | operatorSum;
-
+  | numberSum
+  | operatorSum;
 
 let _getValueFromNumber_ = (number_: number_) => {
-    return number_.value;
+  return number_.value;
 }
 
 export let _getValueFromOperate = (operator: operator) => {
-    console.log(operator, 'appType _getValueFromOperate')
-    return operator.value;
+  return operator.value;
 }
 
 export let buildNumber_ = (value: number): number_ => {
-    return {
-        type: "number_",
-        value,
-    }
+  return {
+    type: "number_",
+    value,
+  }
 }
 
-// type input = 
-// | Number(number)
-// | buildOperator((number, string));
-
 export let buildOperator = (value: operatorValue): operator => {
-    return {
-        type: "operator",
-        value,
-    }
+  return {
+    type: "operator",
+    value,
+  }
 }
 
 export let getValueFromNumberSum = (numberSum: numberSum): number => {
-    console.log(numberSum, 'apptype——getValueFromNumberSum')
-    return numberSum.value;
+  return numberSum.value;
 };
 
 export let getValueFromOperatorSum = (operatorSum: operatorSum) => {
-    return operatorSum.value;
+  return operatorSum.value;
 }
-
-// TODO implement
 
 export let convertNumberSumValueToShowResult = (value: numberSumValue) => {
-    return value
+  return value
 }
-
 
 export let convertOperatorSumValueToShowResult = (value: operatorSumValue) => {
-    if (value.slice(0, 1).toString() === "0") {
-        return value.slice(2)
-    }
-    return value
+  return value
 }
 
-// TODO fix: handle "0 + 1 2"
-
-export let compute = (sum: sum, input: input) => {
+export let compute = (sum: sum, input: input, currentIndex: number, sourceList: List<input>) => {
+  if (sourceList.get(currentIndex + 1)) {
     switch (input.type) {
-        case "number_":
-            switch (sum.type) {
-                case "numberSum":
-                    return {
-                        type: "numberSum",
-                        value: sum.value * 10 + _getValueFromNumber_(input)
-                    }
-                case "operatorSum":
-                    let [previousNumber, _] = sum.value;
-
-                    return {
-                        type: "numberSum",
-                        value: previousNumber + _getValueFromNumber_(input)
-                    }
+      case "number_":
+        switch (sum.type) {
+          case "numberSum":
+            return {
+              type: "numberSum",
+              value: sum.value * 10 + _getValueFromNumber_(input)
             }
-            break
-        case "operator":
-            switch (sum.type) {
-                case "numberSum":
-                    return {
-                        type: "operatorSum",
-                        value: [sum.value, _getValueFromOperate(input)]
-                    }
-                case "operatorSum":
-                    return {
-                        type: "operatorSum",
-                        value: sum.value
-                    }
+          case "operatorSum":
+            switch (sourceList.get(currentIndex + 1).type) {
+              case "number_":
+                let [leftVal, operatorAdd, rightVal] = sum.value
+                return {
+                  type: "operatorSum",
+                  value: [leftVal, operatorAdd, rightVal * 10 + _getValueFromNumber_(input)]
+                }
+              case "operator":
+                let [leftValue, _, rightValue] = sum.value
+                return {
+                  type: "numberSum",
+                  value: leftValue + rightValue * 10 + _getValueFromNumber_(input)
+                }
             }
-            break
+        }
+      case "operator":
+        switch (sum.type) {
+          case "operatorSum":
+            return {
+              type: "operatorSum",
+              value: sum.value
+            }
+          case "numberSum":
+            return {
+              type: "operatorSum",
+              value: [sum.value, _getValueFromOperate(input), 0]
+            }
+        }
     }
+  } else {
+    switch (input.type) {
+      case "number_":
+        switch (sum.type) {
+          case "numberSum":
+            return {
+              type: "numberSum",
+              value: sum.value * 10 + _getValueFromNumber_(input)
+            }
+          case "operatorSum":
+            let [leftVal, operatorAdd, rightVal] = sum.value
+            return {
+              type: "operatorSum",
+              value: [leftVal, operatorAdd, rightVal * 10 + _getValueFromNumber_(input)]
+            }
+        }
+      case "operator":
+        switch (sum.type) {
+          case "numberSum":
+            return {
+              type: "operatorSum",
+              value: [sum.value, _getValueFromOperate(input)]
+            }
+          case "operatorSum":
+            let [leftValue, _, rightValue] = sum.value
+            return {
+              type: "operatorSum",
+              value: [leftValue + rightValue * 10 + _getValueFromOperate(input)]
+            }
+
+        }
+    }
+  }
 }

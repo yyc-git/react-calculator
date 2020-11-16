@@ -17,6 +17,7 @@ let App = () => {
 
     function _resultClear() {
         setShowResult((_result) => "");
+        setExpression((_result) => List());
     }
 
     return <section>
