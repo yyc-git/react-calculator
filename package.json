@@ -8,7 +8,7 @@
         "webpack:dev": "set NODE_ENV=development && webpack --config webpack.config.js",
         "webpack:prod": "set NODE_ENV=production && webpack --config webpack.config.js",
         "webpack:watch": "set NODE_ENV=development && webpack --config webpack.config.watch.js",
-        "webpack:dev-server": "webpack-dev-server  --open  --config webpack.config.js",
+        "webpack:dev-server": "webpack-dev-server  --open 'Google Chrome' --config webpack.config.js",
         "watch": "tsc --watch"
     },
     "dependencies": {
