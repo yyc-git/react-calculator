@@ -1,7 +1,7 @@
 import * as React from "react";
 import NumberButton from "./NumberButton";
 import OperatorButton from "./OperatorButton";
-import { input } from "./AppType";
+import { input, buildNumber_ } from "./AppType";
 import { List } from "immutable";
 
 const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -9,7 +9,7 @@ const operators = ["+"];
 
 let App = () => {
     const [showResult, setShowResult]: [string, any] = React.useState("");
-    const [expression, setExpression]: [List<input>, any] = React.useState(List());
+    const [expression, setExpression]: [List<input>, any] = React.useState(List([buildNumber_(0)]));
 
     // TODO Function to be developed
     // let _resultFunc = () => {

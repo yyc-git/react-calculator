@@ -1,7 +1,8 @@
 import * as React from "react";
 import { List } from "immutable";
-import { input, number_, operator, numberSum, sum, buildNumber_, getValueFromNumberSum, compute, convertNumberSumValueToShowResult } from "./AppType";
-import { flow } from "lodash";
+import { input, number_, operator, numberSum, sum, buildNumber_, compute, getShowResult } from "./AppType";
+import { flow, curry } from "lodash";
+import { printValue } from "../../../utils/log";
 
 let NumberButton = ({ numbers, setShowResult, setExpression, expression }) => {
   let _compute = (expression: List<input>): numberSum => {
@@ -25,7 +26,7 @@ let NumberButton = ({ numbers, setShowResult, setExpression, expression }) => {
     );
 
     flow([
-      _compute, getValueFromNumberSum, convertNumberSumValueToShowResult, setShowResult
+      _compute, getShowResult, curry(printValue)("number:"), setShowResult
     ])(newComputeResult)
   }
 
